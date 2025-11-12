@@ -2,71 +2,75 @@
 
 import { motion } from 'framer-motion';
 import { Brain, Code2, Rocket, Database, Eye, Globe } from 'lucide-react';
+import NodeCluster from './NodeCluster';
 
 export default function MVPFeatures() {
   const features = [
     {
-      icon: <Brain className="w-8 h-8 text-gray-700" />,
-      title: 'Smart Intent Router',
-      desc: 'Routes commands intelligently',
+      icon: <Brain className="w-8 h-8" />,
+      title: 'Natural Language Control',
+      desc: 'Command autonomous systems with plain English',
     },
     {
-      icon: <Code2 className="w-8 h-8 text-gray-700" />,
-      title: 'Coding Agent',
-      desc: 'Builds full-stack apps',
+      icon: <Code2 className="w-8 h-8" />,
+      title: 'Multi-Agent Orchestration',
+      desc: 'Coordinate multiple AI agents seamlessly',
     },
     {
-      icon: <Rocket className="w-8 h-8 text-gray-700" />,
-      title: 'Content Agent',
-      desc: 'Creates publish-ready content',
+      icon: <Rocket className="w-8 h-8" />,
+      title: 'Real-Time Learning',
+      desc: 'AI improves with every execution',
     },
     {
-      icon: <Database className="w-8 h-8 text-gray-700" />,
-      title: 'Memory Kernel',
-      desc: 'Persistent project memory',
+      icon: <Database className="w-8 h-8" />,
+      title: 'Cross-Platform Integration',
+      desc: 'Works with all your existing tools',
     },
     {
-      icon: <Eye className="w-8 h-8 text-gray-700" />,
-      title: 'Execution Console',
-      desc: 'Real-time transparency',
+      icon: <Eye className="w-8 h-8" />,
+      title: 'Secure Execution',
+      desc: 'Enterprise-grade security and compliance',
     },
     {
-      icon: <Globe className="w-8 h-8 text-gray-700" />,
-      title: 'Instant Delivery',
-      desc: 'Live URLs & products',
+      icon: <Globe className="w-8 h-8" />,
+      title: 'Performance Analytics',
+      desc: 'Real-time metrics and insights',
     },
   ];
 
   return (
-    <section className="bg-[#F9FAFB] py-24 px-6">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="bg-black py-40 px-6">
+      <div className="max-w-6xl mx-auto">
         {/* Top Label */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-full shadow-sm"
+          viewport={{ once: true }}
+          className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-medium text-white/60 bg-white/5 border border-white/10 rounded-full"
         >
           <Rocket size={15} />
-          Product Features
+          Built for Autonomous Excellence
         </motion.div>
 
         {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl font-bold text-black mb-6"
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-bold text-white mb-6"
         >
-          MVP Features: No-Code AI Automation
+          MVP Features
         </motion.h2>
 
         {/* Description */}
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-16"
+          viewport={{ once: true }}
+          className="text-lg text-white/60 max-w-3xl mb-16"
         >
           The infinall AI MVP represents the first working version of the
           OriMind ecosystem — where you can type one command and see it executed,
@@ -76,26 +80,25 @@ export default function MVPFeatures() {
         {/* Feature Grid */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
         >
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              whileHover={{ y: -4, scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 200 }}
-              className="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
             >
-              <div className="flex flex-col items-start text-left space-y-4">
-                <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gray-50 border border-gray-200">
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-black">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-500 text-sm">{feature.desc}</p>
-              </div>
+              <NodeCluster
+                nodeCount={18}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.desc}
+              />
             </motion.div>
           ))}
         </motion.div>
@@ -103,13 +106,14 @@ export default function MVPFeatures() {
         {/* Bottom Highlight Box */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm py-8 px-6"
+          viewport={{ once: true }}
+          className="max-w-4xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl py-8 px-8"
         >
-          <p className="text-lg text-gray-700 font-medium">
+          <p className="text-lg text-white/80 font-medium">
             The MVP is not a demo — it&apos;s the first{' '}
-            <span className="font-semibold text-black underline-offset-2">
+            <span className="font-semibold text-white">
               living version
             </span>{' '}
             of autonomous AI execution.

@@ -2,85 +2,84 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Linkedin, X, Link2 } from 'lucide-react'; // lucide-react icons
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll for background opacity
+  if (typeof window !== 'undefined') {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    typeof window !== 'undefined' && window.addEventListener('scroll', handleScroll);
+  }
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#F9FAFB] border-b border-gray-200 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      scrolled ? 'bg-black/80 backdrop-blur-md border-b border-white/10' : 'bg-black/10 border-b border-white/5'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo Section */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-8 h-8 rounded-full border border-gray-300">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="flex items-center justify-center w-8 h-8 rounded-full border border-white/60">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
-              stroke="black"
+              stroke="white"
               className="w-5 h-5"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.75v14.5m0 0L8 15.25m4 4L16 15.25"
-              />
+              <circle cx="12" cy="12" r="3" />
+              <circle cx="12" cy="5" r="2" />
+              <circle cx="19" cy="12" r="2" />
+              <circle cx="12" cy="19" r="2" />
+              <circle cx="5" cy="12" r="2" />
+              <line x1="12" y1="8" x2="12" y2="16" strokeLinecap="round" />
+              <line x1="8" y1="12" x2="16" y2="12" strokeLinecap="round" />
             </svg>
           </div>
-          <span className="text-xl font-semibold text-black">OriMind</span>
+          <span className="text-xl font-bold text-white">OriMind</span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           <Link
             href="#"
-            className="flex items-center gap-1 text-gray-700 hover:text-black text-sm font-medium transition"
+            className="text-white/60 hover:text-white text-sm font-medium transition-colors"
           >
-            <Link2 size={15} />
-            About
+            Product
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-1 text-gray-700 hover:text-black text-sm font-medium transition"
+            className="text-white/60 hover:text-white text-sm font-medium transition-colors"
           >
-            <Link2 size={15} />
-            Blog
+            Vision
           </Link>
           <Link
             href="#"
-            className="text-gray-800 hover:text-black transition"
-            aria-label="LinkedIn"
+            className="text-white/60 hover:text-white text-sm font-medium transition-colors"
           >
-            <Linkedin size={18} />
+            Team
           </Link>
-          <Link
-            href="#"
-            className="text-gray-800 hover:text-black transition"
-            aria-label="X"
-          >
-            <X size={20} />
-          </Link>
-          <Link
-            href="#"
-            className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-900 transition-all flex items-center gap-2"
-          >
-            Get in Touch
-            <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-          </Link>
+          <button className="px-6 py-2.5 border border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-black transition-all duration-300">
+            Join Waitlist
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-black focus:outline-none"
+          className="md:hidden text-white focus:outline-none"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? (
             <svg
               className="w-6 h-6"
               fill="none"
-              stroke="black"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path
@@ -94,7 +93,7 @@ export default function Navbar() {
             <svg
               className="w-6 h-6"
               fill="none"
-              stroke="black"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path
@@ -110,37 +109,34 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-[#F9FAFB] border-t border-gray-200 px-6 py-4 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="md:hidden bg-black/80 backdrop-blur-md border-t border-white/10 px-6 py-4 space-y-4"
+        >
           <Link
             href="#"
-            className="flex items-center gap-1 text-gray-700 hover:text-black text-sm font-medium transition"
+            className="block text-white/60 hover:text-white text-sm font-medium transition-colors"
           >
-            <Link2 size={15} />
-            About
+            Product
           </Link>
           <Link
             href="#"
-            className="flex items-center gap-1 text-gray-700 hover:text-black text-sm font-medium transition"
+            className="block text-white/60 hover:text-white text-sm font-medium transition-colors"
           >
-            <Link2 size={15} />
-            Blog
+            Vision
           </Link>
-          <div className="flex gap-4 pt-2">
-            <Link href="#" className="text-black hover:opacity-70">
-              <Linkedin size={18} />
-            </Link>
-            <Link href="#" className="text-black hover:opacity-70">
-              <X size={20} />
-            </Link>
-          </div>
           <Link
             href="#"
-            className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-900 transition-all flex items-center gap-2"
+            className="block text-white/60 hover:text-white text-sm font-medium transition-colors"
           >
-            Get in Touch
-            <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+            Team
           </Link>
-        </div>
+          <button className="w-full px-6 py-2.5 border border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-black transition-all duration-300">
+            Join Waitlist
+          </button>
+        </motion.div>
       )}
     </nav>
   );
